@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Anki local/generated files
+meta.json
+
+# Build output
+dist/
+*.ankiaddon
+
+# Generated release helper output
+ankiweb/generated/*
+!ankiweb/generated/.gitkeep
+ankiweb/releases/*
+!ankiweb/releases/.gitkeep
+
+# Local environment files
+.env
+.env.*
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

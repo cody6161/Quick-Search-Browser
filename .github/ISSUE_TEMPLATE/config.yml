@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Anki Manual
+    url: https://docs.ankiweb.net/
+    about: Check Anki behavior and search syntax here before filing add-on bugs.

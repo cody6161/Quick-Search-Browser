@@ -1,0 +1,34 @@
+name: Feature request
+description: Suggest an improvement for Quick Search Browser
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or workflow
+      description: What are you trying to do in Anki's Browser?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the behavior or UI you would like.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Optional notes about other approaches.
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Expected scope
+      options:
+        - Browser search/filter behavior
+        - Configuration
+        - Packaging or install flow
+        - Documentation
+        - Other

@@ -1,0 +1,42 @@
+name: Bug report
+description: Report a problem with Quick Search Browser
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: input
+    id: anki-version
+    attributes:
+      label: Anki version
+      placeholder: "Example: 25.06"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "Example: Windows 11"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Describe exactly what you did and what happened.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: errors
+    attributes:
+      label: Error text or screenshots
+      description: Paste any Anki error text here.
+  - type: textarea
+    id: context
+    attributes:
+      label: Add-on context
+      description: List enabled Quick Search filters, add-on config changes, and whether the issue happens with other add-ons disabled.
