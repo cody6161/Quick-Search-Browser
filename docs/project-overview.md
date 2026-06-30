@@ -11,6 +11,7 @@ When an Anki Browser window opens, the add-on inserts a filter row under Anki's 
 - Restrict results to recently added cards.
 - Restrict results to cards due within common day ranges.
 - Restrict results to cards studied within common day ranges.
+- Restrict results to cards with configured yield tags.
 - Restrict results by flag state or specific flag numbers.
 
 The add-on does not maintain its own database or search index. It modifies Anki Browser search text through Anki's search hook system, then asks Anki to run the normal Browser search. This keeps the behavior aligned with Anki's own search syntax and card table.

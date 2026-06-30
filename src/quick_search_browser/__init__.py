@@ -103,6 +103,37 @@ cbStudied: CheckableComboBox = None
 cbNew: QCheckBox = None
 cbFlag: CheckableComboBox = None
 cbRecent: QCheckBox = None
+cbYield: CheckableComboBox = None
+
+DEFAULT_YIELD_TAGS = {
+    "High Yield": "#AK_Step1_v12::#Low/HighYield::1-HighYield",
+    "Relatively High Yield": "#AK_Step1_v12::#Low/HighYield::2-RelativelyHighYield",
+    "High Yield Temporary": "#AK_Step1_v12::#Low/HighYield::3-HighYield-temporary",
+    "Lower Yield": "#AK_Step1_v12::#Low/HighYield::4-LowerYield",
+    "Low Yield": "#AK_Step1_v12::#Low/HighYield::5-LowYield",
+}
+
+
+def _addon_config():
+    """Read add-on config, returning an empty dict when Anki has none yet."""
+
+    return mw.addonManager.getConfig(__name__) or {}
+
+
+def _yield_tag_map():
+    """Return configured yield filter labels and their matching Anki tags."""
+
+    config = _addon_config()
+    configured_tags = config.get("yield_tags", {})
+    if not isinstance(configured_tags, dict):
+        configured_tags = {}
+
+    tag_map = DEFAULT_YIELD_TAGS.copy()
+    for label in DEFAULT_YIELD_TAGS:
+        tag = configured_tags.get(label)
+        if isinstance(tag, str) and tag.strip():
+            tag_map[label] = tag.strip()
+    return tag_map
 
 def _quick_search_row(browser: Browser) -> QHBoxLayout:
     """Create the second browser toolbar row that holds Quick Search Browser controls."""
@@ -137,7 +168,7 @@ def _prepare_filter_widget(widget: QWidget):
 def setup_quick_search_in_browser(browser: Browser):
     """Build the Quick Search Browser UI when an Anki browser window is shown."""
 
-    global cbSuspended, cbDue, cbNew, cbFlag, cbRecent, cbStudied
+    global cbSuspended, cbDue, cbNew, cbFlag, cbRecent, cbStudied, cbYield
     filter_layout = _quick_search_row(browser)
 
     # Hidden by default: suspended cards are excluded unless this is checked.
@@ -175,6 +206,14 @@ def setup_quick_search_in_browser(browser: Browser):
     _prepare_filter_widget(cbStudied)
     filter_layout.addWidget(cbStudied)
 
+    # Single-select yield filter. Each visible option maps to a configurable
+    # note tag, then the search hook adds the matching tag search term.
+    cbYield = CheckableComboBox("Yield", browser, on_change=partial(search, browser), single_selection=True)
+    for label in DEFAULT_YIELD_TAGS:
+        cbYield.addCheckableItem(label)
+    _prepare_filter_widget(cbYield)
+    filter_layout.addWidget(cbYield)
+
     # Multi-select flag filter. "Any flag" is exclusive because it conflicts
     # with picking specific flag numbers.
     cbFlag = CheckableComboBox("Flag", browser, on_change=partial(search, browser))
@@ -193,7 +232,7 @@ def search(browser: Browser):
 def setup_quick_search(context: SearchContext):
     """Modify Anki's browser search query according to selected filters."""
 
-    global cbSuspended, cbDue, cbNew, cbFlag, cbRecent, cbStudied
+    global cbSuspended, cbDue, cbNew, cbFlag, cbRecent, cbStudied, cbYield
 
     query = context.search.strip()
 
@@ -227,6 +266,13 @@ def setup_quick_search(context: SearchContext):
     if cbNew is not None and cbNew.isChecked():
         query = f"({query}) is:new"
 
+    if cbYield is not None:
+        checked = cbYield.checkedItems()
+        if checked:
+            tag = _yield_tag_map().get(checked[0], "").strip()
+            if tag:
+                query = f"({query}) tag:{tag}"
+
     if cbFlag is not None:
         checked = cbFlag.checkedItems()
         if "Any flag" in checked:
@@ -243,7 +289,7 @@ def setup_quick_search(context: SearchContext):
     if cbRecent is not None and cbRecent.isChecked():
         # recent_added_days comes from the addon config. If it is missing, use
         # 10 days as the default recent-added window.
-        config = mw.addonManager.getConfig(__name__)
+        config = _addon_config()
         days = config.get("recent_added_days", 10) if config else 10
         query = f"({query}) added:{days}"
 

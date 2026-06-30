@@ -4,10 +4,6 @@ This is a working list of improvements that could make Quick Search Browser more
 
 ## TODO First
 
-- Add a manafest file to the addon src.
-- Add required src files to addon.
-- add meta.json file to src
-- generate a complete codebase that contains everything needed for github repo and ankiweb ready. follow an addon codebase template structure.
 
 ## High-Value UI Improvements
 
@@ -23,7 +19,6 @@ This is a working list of improvements that could make Quick Search Browser more
 
 - Add deck filter drop-down for the current collection decks.
 - Add note type filter drop-down.
-- Add yield tag filter selector with different yield levels (use the yield tags and set to the anking yield by default).
 - Add tag filter selector with recent or favorite tags.
 - Add card state filters for learning, review, relearning, buried, suspended, and marked.
 - Add interval filters such as young, mature, and custom interval ranges.
