@@ -27,8 +27,9 @@ The Anki add-on source lives in `src/quick_search_browser/`. Repository document
 - `tools/build_ankiaddon.py`: Builds `dist/Quick Search Browser.ankiaddon`.
 - `tools/validate_addon.py`: Validates manifest, config, and Python syntax.
 - `tools/release_check.py`: Runs validation, builds the package, and writes checksums.
-- `tools/bump_version.py`: Bumps `VERSION`, syncs `manifest.json`, and prepares `CHANGELOG.md`.
-- `tools/prepare_release.py`: Runs release checks and generates AnkiWeb release text.
+- `tools/create_release.py`: Bumps, builds, commits, tags, and optionally pushes a release.
+- `tools/bump_version.py`: Lower-level script that bumps `VERSION`, syncs `manifest.json`, and prepares `CHANGELOG.md`.
+- `tools/prepare_release.py`: Lower-level script that runs release checks and generates AnkiWeb release text.
 - `ankiweb/`: AnkiWeb upload templates, scripts, and checklist.
 - `docs/`: Maintainer documentation.
 - `docs/ai/`: AI assistant instructions and Anki add-on context.
@@ -97,11 +98,10 @@ Use `--private` instead of `--public` if needed. Do not commit the generated `di
 Version releases are managed from the root `VERSION` file:
 
 ```bash
-python tools/bump_version.py patch
-python tools/prepare_release.py
-git tag v0.1.1
-git push origin main --tags
+python tools/create_release.py patch
 ```
+
+Add `--push` if you want the script to push the release commit and tag automatically.
 
 ## License
 

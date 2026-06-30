@@ -41,6 +41,7 @@ The package folder name should match the `package` field in `manifest.json`. The
 - `tools/sync_version.py`: syncs `VERSION` into `manifest.json`.
 - `tools/bump_version.py`: bumps `VERSION`, syncs `manifest.json`, and prepares `CHANGELOG.md`.
 - `tools/prepare_release.py`: runs release checks, generates AnkiWeb text, and prints matching tag commands.
+- `tools/create_release.py`: automatic release manager that bumps, builds, commits, tags, and optionally pushes.
 - `tools/install_local.py`: copies the source package into a local Anki `addons21` folder for development testing.
 - `tools/new_addon_from_template.py`: scaffolds a new `src/<package>` package for future add-ons.
 - `tools/publish_github.py`: uses GitHub CLI to create or push a hosted repository when `gh` is installed.

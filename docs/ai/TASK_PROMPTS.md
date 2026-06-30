@@ -6,7 +6,7 @@ Investigate the reported Anki add-on bug. Read `docs/ai/REPO_CONTEXT.md`, inspec
 
 ## Release Prep
 
-Prepare this add-on for release. Confirm or bump `VERSION`, update changelog and AnkiWeb text if needed, run `python tools/prepare_release.py`, and summarize the package path, checksum, release metadata, matching Git tag, and manual AnkiWeb upload steps.
+Prepare this add-on for release. Use `python tools/create_release.py patch` unless a different version is requested, review the generated release commit/tag, and summarize the package path, checksum, release metadata, matching Git tag, push commands, and manual AnkiWeb upload steps.
 
 ## New Add-on From Template
 
