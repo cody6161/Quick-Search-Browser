@@ -44,7 +44,26 @@ def update_changelog(version: str) -> None:
         return
 
     if "## Unreleased" in text:
-        text = text.replace("## Unreleased", f"## Unreleased\n\n- \n\n{released_header}", 1)
+        lines = text.splitlines()
+        unreleased_index = next(
+            index for index, line in enumerate(lines) if line.strip() == "## Unreleased"
+        )
+        next_release_index = next(
+            (
+                index
+                for index in range(unreleased_index + 1, len(lines))
+                if lines[index].startswith("## ")
+            ),
+            len(lines),
+        )
+        unreleased_body = "\n".join(lines[unreleased_index + 1 : next_release_index]).strip()
+        release_body = unreleased_body if unreleased_body and unreleased_body != "-" else "- "
+        new_lines = (
+            lines[: unreleased_index + 1]
+            + ["", "- ", "", released_header, "", *release_body.splitlines(), ""]
+            + lines[next_release_index:]
+        )
+        text = "\n".join(new_lines).rstrip() + "\n"
     else:
         text = text.rstrip() + f"\n\n## Unreleased\n\n- \n\n{released_header}\n\n- \n"
 
