@@ -14,6 +14,7 @@ Quick Search Browser is an Anki add-on that adds quick filter controls to the Br
 - Filter recently added cards.
 - Filter cards due in 1, 3, 7, 14, or 30 days.
 - Filter cards studied in 1, 3, 7, 14, or 30 days.
+- Filter cards by configured yield tags: High Yield, Relatively High Yield, High Yield Temporary, Lower Yield, and Low Yield.
 - Filter cards by any flag or by specific flag numbers.
 
 ## Source Layout
@@ -71,6 +72,8 @@ Upload that `.ankiaddon` file to AnkiWeb. Do not upload the whole GitHub repo zi
 ## Configuration
 
 The `recent_added_days` option in `src/quick_search_browser/config.json` controls how many days are included by the `Recent Added` checkbox. The default is `10`.
+
+The `yield_tags` option maps each `Yield` dropdown label to the Anki tag searched when that option is selected. Change the tag values if your collection uses different tag names.
 
 ## Roadmap
 
