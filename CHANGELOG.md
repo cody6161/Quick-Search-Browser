@@ -4,6 +4,10 @@
 
 - 
 
+## 2.0.0 - 2026-06-30
+
+- 
+
 ## 0.3.0 - 2026-06-30
 
 - Added a configurable `Yield` browser dropdown with High Yield, Relatively High Yield, High Yield Temporary, Lower Yield, and Low Yield tag filters.
