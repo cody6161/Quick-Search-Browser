@@ -54,6 +54,6 @@ GitHub is used for source hosting, CI, issue tracking, and release artifacts. An
 
 - `.github/` contains CI and release automation.
 - `ankiweb/` contains manual upload templates and preparation scripts.
-- `tools/` contains reusable local scripts for validation, packaging, release checks, local install, and GitHub CLI publishing.
+- `tools/` contains reusable local scripts for validation, packaging, release checks, local install, GitHub repository publishing, and one-command GitHub release publishing.
 
 AnkiWeb upload remains a manual browser step. The repository prepares the package and listing text, but it does not attempt to automate AnkiWeb credentials or browser upload.

@@ -36,12 +36,12 @@ The package folder name should match the `package` field in `manifest.json`. The
 
 - `tools/build_ankiaddon.py`: builds `dist/<Add-on Name>.ankiaddon`.
 - `tools/validate_addon.py`: validates manifest, config JSON, required source files, and Python syntax.
-- `tools/release_check.py`: runs validation, rebuilds the package, verifies archive contents, and writes `dist/SHA256SUMS.txt`.
+- `tools/release_check.py`: runs validation, rebuilds the package, verifies archive contents, and writes `dist/SHA256SUMS.txt` and `dist/release.json`.
 - `tools/version.py`: prints the current add-on version.
 - `tools/sync_version.py`: syncs `VERSION` into `manifest.json`.
 - `tools/bump_version.py`: bumps `VERSION`, syncs `manifest.json`, and prepares `CHANGELOG.md`.
 - `tools/prepare_release.py`: runs release checks, generates AnkiWeb text, and prints matching tag commands.
-- `tools/create_release.py`: automatic release manager that bumps, builds, commits, tags, and optionally pushes.
+- `tools/create_release.py`: automatic release manager that bumps, builds, writes GitHub release notes, commits, tags, optionally pushes, and can create or update the GitHub release with artifacts.
 - `tools/install_local.py`: copies the source package into a local Anki `addons21` folder for development testing.
 - `tools/new_addon_from_template.py`: scaffolds a new `src/<package>` package for future add-ons.
 - `tools/publish_github.py`: uses GitHub CLI to create or push a hosted repository when `gh` is installed.
@@ -78,6 +78,7 @@ Generated files should not be committed unless they are intentional placeholders
 
 - `dist/`: built `.ankiaddon` packages and checksums.
 - `dist/release.json`: generated release metadata for GitHub release artifacts.
+- `dist/github-release-notes.md`: generated GitHub release description from `CHANGELOG.md`.
 - `ankiweb/generated/ankiweb-description.md`: generated AnkiWeb listing text.
 - `__pycache__/`: Python bytecode cache folders.
 - `meta.json`: local Anki add-on metadata.

@@ -28,7 +28,7 @@ The Anki add-on source lives in `src/quick_search_browser/`. Repository document
 - `tools/build_ankiaddon.py`: Builds `dist/Quick Search Browser.ankiaddon`.
 - `tools/validate_addon.py`: Validates manifest, config, and Python syntax.
 - `tools/release_check.py`: Runs validation, builds the package, and writes checksums.
-- `tools/create_release.py`: Bumps, builds, commits, tags, and optionally pushes a release.
+- `tools/create_release.py`: Bumps, builds, commits, tags, optionally pushes, and can create or update the GitHub release with package artifacts.
 - `tools/bump_version.py`: Lower-level script that bumps `VERSION`, syncs `manifest.json`, and prepares `CHANGELOG.md`.
 - `tools/prepare_release.py`: Lower-level script that runs release checks and generates AnkiWeb release text.
 - `ankiweb/`: AnkiWeb upload templates, scripts, and checklist.
@@ -105,6 +105,14 @@ python tools/create_release.py patch
 ```
 
 Add `--push` if you want the script to push the release commit and tag automatically.
+
+To publish the GitHub release and upload the generated `.ankiaddon`, checksum,
+and release metadata in the same run, use GitHub CLI after authenticating with
+`gh auth login`:
+
+```bash
+python tools/create_release.py patch --push --github-release
+```
 
 ## License
 

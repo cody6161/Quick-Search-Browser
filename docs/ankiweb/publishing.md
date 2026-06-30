@@ -7,16 +7,22 @@ AnkiWeb upload is a manual browser step. Use `ankiweb/` to make that manual step
 Run:
 
 ```bash
-python tools/release_check.py
-python ankiweb/scripts/prepare_ankiweb_release.py
+python tools/create_release.py patch
 ```
 
 Review:
 
 - `dist/*.ankiaddon`
 - `dist/SHA256SUMS.txt`
+- `dist/release.json`
 - `ankiweb/generated/ankiweb-description.md`
 - `ankiweb/templates/upload-checklist.md`
+
+For GitHub publishing in the same release run, use:
+
+```bash
+python tools/create_release.py patch --push --github-release
+```
 
 ## Upload
 

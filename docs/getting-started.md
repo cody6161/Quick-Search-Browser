@@ -5,7 +5,7 @@
 - Python 3.10 or newer. GitHub Actions uses Python 3.12.
 - Anki installed locally for manual testing.
 - Git for version control.
-- Optional: GitHub CLI (`gh`) for one-command repository publishing.
+- Optional: GitHub CLI (`gh`) for one-command repository publishing and GitHub release publishing.
 
 ## Local Validation
 

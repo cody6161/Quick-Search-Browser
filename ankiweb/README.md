@@ -5,13 +5,14 @@ This folder holds everything needed to prepare the manual AnkiWeb upload. AnkiWe
 ## Standard Flow
 
 1. Run `python tools/create_release.py patch`, `minor`, `major`, or an explicit version from the repository root.
-2. Confirm `src/<package>/manifest.json` has the correct add-on name, package id, and version.
-3. Review `CHANGELOG.md`.
-4. Review the generated release commit and tag.
-5. Open `ankiweb/generated/ankiweb-description.md` and review the text.
-6. Upload `dist/*.ankiaddon` on AnkiWeb.
-7. Paste the reviewed description and changelog into the AnkiWeb listing.
-8. Save the completed checklist from `ankiweb/templates/upload-checklist.md` with the release notes.
+2. Use `python tools/create_release.py patch --push --github-release` when GitHub should be published in the same run.
+3. Confirm `src/<package>/manifest.json` has the correct add-on name, package id, and version.
+4. Review `CHANGELOG.md`.
+5. Review the generated release commit, tag, and GitHub release notes.
+6. Open `ankiweb/generated/ankiweb-description.md` and review the text.
+7. Upload `dist/*.ankiaddon` on AnkiWeb.
+8. Paste the reviewed description and changelog into the AnkiWeb listing.
+9. Save the completed checklist from `ankiweb/templates/upload-checklist.md` with the release notes.
 
 ## Folder Map
 

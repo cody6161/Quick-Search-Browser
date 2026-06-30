@@ -35,6 +35,7 @@ The add-on treats Anki search syntax as the source of truth. It builds query fra
 - `added:<days>`
 - `rated:<days>`
 - `prop:due=<n>`
+- `tag:<tag>`
 - `flag:<n>`
 - `-flag:0`
 
@@ -52,6 +53,7 @@ The current implementation stores filter widgets in module-level globals:
 - `cbNew`
 - `cbFlag`
 - `cbRecent`
+- `cbYield`
 
 That is simple and matches the current small scope. If future work supports multiple simultaneous Browser windows more rigorously, this state should move to a per-browser object or weak mapping keyed by Browser instance.
 
@@ -74,6 +76,8 @@ The build excludes generated Python cache files, local add-on metadata, and comm
 - `__init__.py` exists in the package.
 
 `tools/release_check.py` runs validation, rebuilds the package, checks required archive files, rejects mismatched Git tags in release automation, and writes `dist/SHA256SUMS.txt` plus `dist/release.json`.
+
+`tools/create_release.py` is the high-level release driver. It bumps version metadata, promotes changelog notes, runs release preparation, writes `dist/github-release-notes.md`, creates the release commit and tag, optionally pushes them, and can create or update the GitHub release through GitHub CLI.
 
 ## Documentation Architecture
 

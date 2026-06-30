@@ -54,7 +54,7 @@ The bump script:
 
 - Updates `VERSION`.
 - Updates `src/<package>/manifest.json`.
-- Creates a matching release section in `CHANGELOG.md`.
+- Moves the current `CHANGELOG.md` Unreleased notes into a matching release section.
 - Prints the matching Git tag.
 
 Use `--no-changelog` when you only want metadata changes.
@@ -69,19 +69,34 @@ This runs release checks, generates AnkiWeb text, and prints the matching Git ta
 
 ## Create Release Automatically
 
-Use `tools/create_release.py` when you want the script to bump the version, build artifacts, create the release commit, and create the Git tag:
+Use `tools/create_release.py` when you want the script to bump the version, build artifacts, create the release commit, create the Git tag, and write changelog-based GitHub release notes:
 
 ```bash
 python tools/create_release.py patch
 ```
 
-This does not push by default. After reviewing the commit and tag, push with the commands printed by the script.
+This writes `dist/github-release-notes.md` along with the package artifacts. It does not push by default. After reviewing the commit and tag, push with the commands printed by the script.
 
 To push automatically:
 
 ```bash
 python tools/create_release.py patch --push
 ```
+
+To push and create or update the GitHub release in the same run, install and authenticate GitHub CLI, then run:
+
+```bash
+gh auth login
+python tools/create_release.py patch --push --github-release
+```
+
+The GitHub release uses the matching `CHANGELOG.md` section as its description and uploads:
+
+- `dist/<Add-on Name>.ankiaddon`
+- `dist/SHA256SUMS.txt`
+- `dist/release.json`
+
+Use `--repo OWNER/REPO` if GitHub CLI cannot infer the repository from `origin`.
 
 By default, the script requires a clean working tree before it starts. This keeps unrelated local edits out of the release commit. If you intentionally want to include current local edits in the release commit, use:
 

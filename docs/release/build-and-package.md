@@ -21,6 +21,8 @@ This validates source files, checks version metadata, builds the package, confir
 - `dist/SHA256SUMS.txt`
 - `dist/release.json`
 
+`tools/create_release.py` also writes `dist/github-release-notes.md` from the matching `CHANGELOG.md` release section. That notes file is used when publishing a GitHub release with `--github-release`.
+
 ## Files Excluded from Package
 
 - `__pycache__/`
