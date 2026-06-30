@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -27,6 +28,10 @@ from versioning import read_manifest, read_version
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
 CHANGELOG = ROOT / "CHANGELOG.md"
+GH_FALLBACKS = [
+    Path("C:/Program Files/GitHub CLI/gh.exe"),
+    Path.home() / "AppData/Local/Programs/GitHub CLI/gh.exe",
+]
 RELEASE_PATHS = [
     "VERSION",
     "CHANGELOG.md",
@@ -58,6 +63,18 @@ def run(args: list[str], *, capture: bool = False, check: bool = True) -> str:
 
 def git_output(args: list[str]) -> str:
     return run(["git", *args], capture=True)
+
+
+def gh_command() -> str:
+    path = shutil.which("gh")
+    if path:
+        return path
+
+    for fallback in GH_FALLBACKS:
+        if fallback.exists():
+            return str(fallback)
+
+    return "gh"
 
 
 def worktree_status() -> str:
@@ -94,9 +111,10 @@ def ensure_github_release_ready(args: argparse.Namespace) -> None:
         return
     if not args.push:
         raise SystemExit("`--github-release` requires `--push` so the release tag exists on GitHub.")
+    gh = gh_command()
     try:
-        run(["gh", "--version"], capture=True)
-        auth_args = ["gh", "auth", "status"]
+        run([gh, "--version"], capture=True)
+        auth_args = [gh, "auth", "status"]
         if args.repo:
             auth_args.extend(["--hostname", "github.com"])
         run(auth_args, capture=True)
@@ -171,7 +189,7 @@ def write_github_release_notes(version: str, tag: str) -> Path:
 
 
 def gh_args(args: argparse.Namespace, command: list[str]) -> list[str]:
-    full_command = ["gh", *command]
+    full_command = [gh_command(), *command]
     if args.repo:
         full_command.extend(["--repo", args.repo])
     return full_command

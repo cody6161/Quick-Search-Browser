@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- 
+
+## 0.3.0 - 2026-06-30
+
 - Added a configurable `Yield` browser dropdown with High Yield, Relatively High Yield, High Yield Temporary, Lower Yield, and Low Yield tag filters.
 - Added default `yield_tags` configuration and config help so users can remap yield dropdown labels to their own Anki tags.
 - Added one-command GitHub release publishing to `tools/create_release.py`, including version bumping, release checks, `.ankiaddon` packaging, changelog-based GitHub release notes, commit/tag creation, optional push, and GitHub release asset upload.
@@ -14,4 +18,3 @@
 - Move Quick Search Browser controls to a second Browser toolbar row.
 - Group checkbox filters before drop-down filters.
 - Add GitHub and AnkiWeb packaging files.
-
