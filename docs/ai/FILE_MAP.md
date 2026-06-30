@@ -17,6 +17,7 @@
 - `tools/sync_version.py`: syncs `VERSION` into the manifest.
 - `tools/bump_version.py`: bumps version metadata and prepares the changelog.
 - `tools/prepare_release.py`: runs release checks and AnkiWeb text generation.
+- `tools/create_release.py`: automates version bump, release prep, commit, tag, and optional push.
 - `tools/install_local.py`: copies source into a local Anki addons folder.
 - `tools/new_addon_from_template.py`: scaffolds a new source package.
 - `tools/publish_github.py`: uses GitHub CLI to create or push the repository.

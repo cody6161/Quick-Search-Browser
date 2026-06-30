@@ -67,6 +67,30 @@ python tools/prepare_release.py
 
 This runs release checks, generates AnkiWeb text, and prints the matching Git tag commands.
 
+## Create Release Automatically
+
+Use `tools/create_release.py` when you want the script to bump the version, build artifacts, create the release commit, and create the Git tag:
+
+```bash
+python tools/create_release.py patch
+```
+
+This does not push by default. After reviewing the commit and tag, push with the commands printed by the script.
+
+To push automatically:
+
+```bash
+python tools/create_release.py patch --push
+```
+
+By default, the script requires a clean working tree before it starts. This keeps unrelated local edits out of the release commit. If you intentionally want to include current local edits in the release commit, use:
+
+```bash
+python tools/create_release.py patch --allow-dirty
+```
+
+Supported version arguments are `patch`, `minor`, `major`, or an explicit semantic version like `1.2.3`.
+
 ## Tag Rule
 
 GitHub release tags must match `VERSION`.
